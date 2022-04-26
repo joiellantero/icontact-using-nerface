@@ -1,0 +1,69 @@
+dataset:
+  basedir: ../../data/person_1
+  far: 0.8
+  half_res: false
+  near: 0.2
+  no_ndc: true
+  testskip: 1
+  type: blender
+experiment:
+  device: 0
+  id: person_1
+  logdir: logs/
+  print_every: 100
+  randomseed: 42
+  save_every: 5000
+  train_iters: 1000000
+  validate_every: 1000
+models:
+  coarse:
+    hidden_size: 256
+    include_input_dir: false
+    include_input_xyz: true
+    log_sampling_dir: true
+    log_sampling_xyz: true
+    num_encoding_fn_dir: 4
+    num_encoding_fn_xyz: 10
+    num_layers: 4
+    skip_connect_every: 3
+    type: ConditionalBlendshapePaperNeRFModel
+    use_viewdirs: true
+  fine:
+    hidden_size: 256
+    include_input_dir: false
+    include_input_xyz: true
+    log_sampling_dir: true
+    log_sampling_xyz: true
+    num_encoding_fn_dir: 4
+    num_encoding_fn_xyz: 10
+    num_layers: 4
+    skip_connect_every: 3
+    type: ConditionalBlendshapePaperNeRFModel
+    use_viewdirs: true
+nerf:
+  encode_direction_fn: positional_encoding
+  encode_position_fn: positional_encoding
+  train:
+    chunksize: 2048
+    lindisp: false
+    num_coarse: 64
+    num_fine: 64
+    num_random_rays: 2048
+    perturb: true
+    radiance_field_noise_std: 0.1
+    white_background: false
+  use_viewdirs: true
+  validation:
+    chunksize: 65536
+    lindisp: false
+    num_coarse: 64
+    num_fine: 64
+    perturb: true
+    radiance_field_noise_std: 0.0
+    white_background: false
+optimizer:
+  lr: 0.0005
+  type: Adam
+scheduler:
+  lr_decay: 250
+  lr_decay_factor: 0.1
