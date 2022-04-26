@@ -135,7 +135,7 @@ nerf:
     # Size of each chunk (rays are batched into "chunks" and passed through
     # Size of each chunk (rays are batched into "chunks" and passed through
     # the network)
-    chunksize: 2048 #16384  #131072  # 131072  # 1024 * 32
+    chunksize: 1024 #2048 #16384  #131072  # 131072  # 1024 * 32
     # Whether or not to perturb the sampled depth values.
     perturb: True
     # Number of depth samples per ray for the coarse network.
@@ -153,7 +153,7 @@ nerf:
   validation:
     # Number of random rays to retain from each image.
     # These sampled rays are used for training, and the others are discarded.
-    chunksize: 65536 #4096  #131072   # 1024 * 32
+    chunksize: 32768 #65536 #4096  #131072   # 1024 * 32
     # Whether or not to perturb the sampled depth values.
     perturb: True
     # Number of depth samples per ray for the coarse network.
