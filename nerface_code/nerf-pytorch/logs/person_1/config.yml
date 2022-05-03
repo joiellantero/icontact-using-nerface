@@ -44,7 +44,7 @@ nerf:
   encode_direction_fn: positional_encoding
   encode_position_fn: positional_encoding
   train:
-    chunksize: 2048
+    chunksize: 1024
     lindisp: false
     num_coarse: 64
     num_fine: 64
@@ -54,7 +54,7 @@ nerf:
     white_background: false
   use_viewdirs: true
   validation:
-    chunksize: 65536
+    chunksize: 32768
     lindisp: false
     num_coarse: 64
     num_fine: 64

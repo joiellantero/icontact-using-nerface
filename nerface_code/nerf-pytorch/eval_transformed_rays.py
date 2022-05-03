@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 import os
 import time
@@ -373,7 +375,7 @@ def main():
     #######################
     no_background = False
     no_expressions = False
-    no_lcode = False
+    no_lcode = True
     nerf = False
     frontalize = False
     interpolate_mouth = False
@@ -417,16 +419,16 @@ def main():
             #expression = render_expressions[0] ### TODO fixes expr
             #expression = torch.zeros_like(expression).to(device)
 
-            ablate = 'view_dir'
+            ablate = 'latent_code'
 
             if ablate == 'expression':
-                pose = render_poses[100]
+                pose = render_poses[997]
             elif ablate == 'latent_code':
-                pose = render_poses[100]
-                expression = render_expressions[100]
-                if idx_map[100+i,1] >= 0:
+                pose = render_poses[997]
+                expression = render_expressions[997]
+                if idx_map[997+i,1] >= 0:
                     #print("found latent code for this image")
-                    index_of_image_after_train_shuffle = idx_map[100+i,1]
+                    index_of_image_after_train_shuffle = idx_map[997+i,1]
             elif ablate == 'view_dir':
                 pose = render_poses[100]
                 expression = render_expressions[100]
@@ -463,7 +465,7 @@ def main():
                 background_prior = background.view(-1,3) if (background is not None) else None,
                 #background_prior = torch.ones_like(background).view(-1,3),  # White background
                 latent_code = latent_code,
-                ray_directions_ablation = ray_directions_ablation
+                ray_directions_ablation = None #ray_directions_ablation
             )
             rgb = rgb_fine if rgb_fine is not None else rgb_coarse
             normals = torch_normal_map(disp_fine, focal, weights, clean=True)

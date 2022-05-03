@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 import os
 import time
@@ -369,9 +371,9 @@ def main():
     times_per_image = []
 
     #render_poses = render_poses.float().to(device)
-    #render_poses = poses[i_test].float().to(device)
+    render_poses = poses[i_test].float().to(device)
     #expressions = torch.arange(-6,6,0.5).float().to(device)
-    #render_expressions = expressions[i_test].float().to(device)
+    render_expressions = expressions[i_test].float().to(device)
     #avg_img = torch.mean(images[i_train],axis=0)
     #avg_img = torch.ones_like(avg_img)
 
@@ -379,7 +381,7 @@ def main():
     #for i, pose in enumerate(tqdm(render_poses)):
     index_of_image_after_train_shuffle = 0
     # render_expressions = render_expressions[[300]] ### TODO render specific expression
-    render_expressions=None
+    # render_expressions=None
     #######################
     no_background = False
     no_expressions = False
@@ -412,7 +414,7 @@ def main():
         rgb = None, None
         disp = None, None
         with torch.no_grad():
-            #pose = render_poses[i]
+            # pose = render_poses[i]
 
             if interpolate_mouth:
                 frame_id = 241
@@ -423,12 +425,12 @@ def main():
 
             if frontalize:
                 pose = render_poses[0]
-            #pose = render_poses[300] ### TODO fixes pose
+            # pose = render_poses[164] ### TODO fixes pose
             #expression = render_expressions[0] ### TODO fixes expr
             #expression = torch.zeros_like(expression).to(device)
 
-            #ablate = 'view_dir'
-            ablate=None
+            ablate = 'view_dir'
+            # ablate=None
 
             if ablate == 'expression':
                 pose = render_poses[100]
@@ -440,7 +442,7 @@ def main():
                     index_of_image_after_train_shuffle = idx_map[100+i,1]
             elif ablate == 'view_dir':
                 pose = render_poses[100]
-                expression = render_expressions[100]
+                expression = render_expressions[164]
                 _, ray_directions_ablation = get_ray_bundle(hwf[0], hwf[1], hwf[2], render_poses[240+i][:3, :4])
 
             pose = pose[:3, :4].to(device)
