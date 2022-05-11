@@ -60,6 +60,8 @@
 
 - Download the dataset [here](https://drive.google.com/drive/folders/1rr8UzLbzWI62qbagQF2lnlsZP3Fr_Uu1?usp=sharing).
 
+- Go to the base directory of the project (where README.md is located). Create a folder named "data" then place the dataset folder, i.e., "person_1", inside the said folder.
+
 - Navigate to the training script
 
   ```shell
