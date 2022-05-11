@@ -2,3 +2,4 @@ logs/
 nohup.out
 out*.mp4
 renders/
+data/
