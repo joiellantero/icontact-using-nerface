@@ -93,6 +93,8 @@
 
 - Run the script
 
+  > The eval_transformed_rays.py was added with an ablation code that sets the direction of the talking head into a fixed novel viewpoint, thus, correcting eye gaze and head position. 
+
   ```shell
   python eval_transformed_rays.py --config ../../data/person_1/person_1_config.yml --checkpoint ./logs/person_1/checkpoint999999.ckpt --savedir ./renders/<yourfoldername>
 
