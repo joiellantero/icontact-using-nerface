@@ -3,9 +3,9 @@
 ## Features
 
 
-Input | Output
-- | -
-<img src="./docs/input.gif" /> | <img src=".//docs/output.gif" />
+| Input | Output |
+|-------|--------|
+| <img src="./docs/input.gif" /> | <img src=".//docs/output.gif" /> |
 
 ## Setting up the environment
 
