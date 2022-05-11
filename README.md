@@ -2,10 +2,11 @@
 
 ## Features
 
+![flowchart](./docs/flowchart.jpg)
 
 | Input | Output |
 |-------|--------|
-| <img src="./docs/input.gif" /> | <img src=".//docs/output.gif" /> |
+| <img src="./docs/input.gif" alt="input video" /> | <img src=".//docs/output.gif" alt="output video" /> |
 
 ## Setting up the environment
 
@@ -46,6 +47,8 @@
       ```
 
 ## Training the model
+
+- Download the dataset [here](https://drive.google.com/drive/folders/1rr8UzLbzWI62qbagQF2lnlsZP3Fr_Uu1?usp=sharing)
 
 - Navigate to the training script
 
