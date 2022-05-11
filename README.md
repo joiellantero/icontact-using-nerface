@@ -1,65 +1,112 @@
-## NerFACE: Dynamic Neural Radiance Fields for Monocular 4D Facial Avatar Reconstruction [CVPR 2021 Oral Presentation]
+# iContact using NeRFace
 
-*Guy Gafni<sup>1</sup>, Justus Thies<sup>1</sup>, Michael Zollhöfer<sup>2</sup>, Matthias Nießner<sup>1</sup>*
-
-<sup>1</sup> Technichal University of Munich, <sup>2</sup>Facebook Reality Labs
-
-![teaser](https://justusthies.github.io/posts/nerface/teaser.jpg)
-
-ArXiv:  <a href="https://arxiv.org/pdf/2012.03065">PDF</a>,  <a href="https://arxiv.org/abs/2012.03065">abs</a>
-
-Project Page & Video: <a href="https://gafniguy.github.io/4D-Facial-Avatars/">https://gafniguy.github.io/4D-Facial-Avatars/</a>
+## Features
 
 
-**If you find our work useful, please include the following citation:**
+| Input | Output |
+|-------|--------|
+| <img src="./docs/input.gif" /> | <img src=".//docs/output.gif" /> |
 
+## Setting up the environment
 
-```
-@InProceedings{Gafni_2021_CVPR,
-    author    = {Gafni, Guy and Thies, Justus and Zollh{\"o}fer, Michael and Nie{\ss}ner, Matthias},
-    title     = {Dynamic Neural Radiance Fields for Monocular 4D Facial Avatar Reconstruction},
-    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-    month     = {June},
-    year      = {2021},
-    pages     = {8649-8658}
-}
-```
+- Clone the repository
+  
+  ```shell
+  git clone https://github.com/joiellantero/NeRFace.git
+  ```
 
-**Dataset and License**
+- Navigate to the directory of the project.
 
-Dataset is <a  href="https://syncandshare.lrz.de/getlink/fiBTHis1fS8Zxqd55XCAjjG8/nerface_dataset.zip">available</a>.
-Please do not use it for commercial use and respect the license attached within the zip file. If you make use of this dataset or code, please cite our paper. 
+  ```shell
+  cd ./NeRFace/nerface_code
+  ```
 
+- Create a virtual environment using the environment.yml file
 
-**Code Structure**
-The nerf code is heavily based on <a  href="https://github.com/krrish94/nerf-pytorch">this repo by Krishna Murthy</a>. Thank you!
+  ```shell
+  conda env create -f environment.yml
+  ```
 
-Installation etc:
-Originally the project used torch 1.7.1, but this should also run with torch 1.9.0 (cuda 11).
-If you get any errors related to `torchsearchsorted`, ignore this module and don't bother installing it, and comment out its imports. Its functionality is impmlemented in pytorch.
-These two are interchangeable:
-```
-    #inds = torchsearchsorted.searchsorted(cdf, u, side="right")  # needs compilationo of torchsearchsorted
-    inds = torch.searchsorted(cdf.detach(), u, right=True)  # native to pytorch 
-```
+- Activate the virtual environment.
 
-The main training and testing scripts are `train_transformed_rays.py` and `eval_transformed_rays.py`, respectively. They are in the main working folder which is in `nerface_code/nerf-pytorch/` 
+  ```shell
+  conda activate nerf
+  ```
 
-The training script expects a path to a config file, e.g.:
+- Optional: Install Pytorch3D (Only do this if it's not yet installed)
 
-`python train_transformed_rays.py --config  --config ./path_to_data/person_1/person_1_config.yml `
+  - Recommended to be installed from a local clone
 
-The eval script will also take a path to a model checkpoint and a folder to save the rendered images:
+    - Navigate to `cd ./nerface_code/nerf-pytorch`
+    - clone and install pytorch3D
+    
+      ```shell
+      git clone https://github.com/facebookresearch/pytorch3d.git
+      cd pytorch3d && pip install -e .
+      ```
 
-`python eval_transformed_rays.py --config ./path_to_data/person_1/person_1_config.yml --checkpoint /path/to/checkpoint/checkpoint400000.ckpt --savedir ./renders/person_1_rendered_frames`
+## Training the model
 
-The config file must refer to a dataset to use in `dataset.basedir`. Download the dataset from the .zip shared above, and place it in the nerf-pytorch directory. 
+- Navigate to the training script
 
-If you have your own video sequence including per frame tracking, you can see how I create the json's for training in the `real_to_nerf.py` file (main function). This does not include the code for tracking, which unfortunately I cannot publish. 
+  ```shell
+  cd ./NeRFace/nerface_code/nerf-pytorch
+  ```
 
+- Double check if you have activated the virtual environment
 
-Don't hesitate to contact [guy.gafni at tum.de] for additional questions, or open an issue here.
+  ```shell
+  conda activate nerf
+  ```
 
-The material in this repository is licensed under an Attribution-NonCommercial-ShareAlike 4.0 International license. 
+- Run the training script
 
-Code for the webpage is borrowed from the <a href="https://github.com/daveredrum/ScanRefer">ScanRefer project</a>.
+  - The training should run for approximately 6 days using a computer with these specifications: NVIDIA 3070 Ti GPU with 8GB vRAM, Ryzen 7 5800 with 32GB RAM.
+
+  - The dataloader file is an optimized version of the training script to make it run on GPU’s with below 70GB ram.
+
+    ```shell
+    python3 train_transformed_rays_dataloader.py --config ../../data/person_1/person_1_config.yml
+    ```
+
+    - It's recommended to use `nohup` to run it in the background
+
+      ```shell
+      nohup python3 train_transformed_rays_dataloader.py --config ../../data/person_1/person_1_config.yml &
+      ```
+
+## Processing input video using the trained model
+
+> The output will be several photos--these are the processed frames of the video. These will be converted to a video in the next step
+
+- Navigate to `./NeRFace/nerface_code/nerf-pytorch`
+
+  ```shell
+  cd ./NeRFace/nerface_code/nerf-pytorch
+  ```
+
+- Create a folder named "renders"
+- Create a folder inside the "renders" folder named "exp_1"
+
+  > You may also use a different name other than exp_1
+  > This is where the processed images will be saved
+
+- Run the script
+
+  ```shell
+  python eval_transformed_rays.py --config ../../data/person_1/person_1_config.yml --checkpoint ./logs/person_1/checkpoint999999.ckpt --savedir ./renders/<yourfoldername>
+
+  python eval_transformed_rays.py --config ../../data/person_1/person_1_config.yml --checkpoint ./logs/person_1/checkpoint999999.ckpt --savedir ./renders/exp_1
+  ```
+
+## Converting the images to video
+
+  ```shell
+  ffmpeg -i renders/<yourfoldername>/%04d.png -pix_fmt yuv420p -crf 19 ./<youroutputfilename>.mp4
+
+  ffmpeg -i renders/exp_1/%04d.png -pix_fmt yuv420p -crf 19 ./out.mp4
+  ```
+
+## References
+
+- [Original repository by Guy Gafni](https://github.com/gafniguy/4D-Facial-Avatars.git)
