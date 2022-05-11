@@ -2,11 +2,21 @@
 
 ## Features
 
+### Methodology Diagram 
+
 ![flowchart](./docs/flowchart.jpg)
+
+### Example input and output using training and rendering script
 
 | Input | Output |
 |-------|--------|
 | <img src="./docs/input.gif" alt="input video" /> | <img src=".//docs/output.gif" alt="output video" /> |
+
+### Dataset
+
+- The dataset can be downloaded [here](https://drive.google.com/drive/folders/1rr8UzLbzWI62qbagQF2lnlsZP3Fr_Uu1?usp=sharing).
+
+- Preprocessing a new input dataset would be an intensive process and the calibration tool needed for it had been recently decommissioned. Thus, we are limited by these datasets. We’ll update this repo once we explore ways to process more datasets.
 
 ## Setting up the environment
 
@@ -48,7 +58,7 @@
 
 ## Training the model
 
-- Download the dataset [here](https://drive.google.com/drive/folders/1rr8UzLbzWI62qbagQF2lnlsZP3Fr_Uu1?usp=sharing)
+- Download the dataset [here](https://drive.google.com/drive/folders/1rr8UzLbzWI62qbagQF2lnlsZP3Fr_Uu1?usp=sharing).
 
 - Navigate to the training script
 
