@@ -1,6 +1,11 @@
-# Configured NeRFace
+# iContact using NeRFace
 
 ## Features
+
+
+Input | Output
+- | -
+<img src="./docs/input.gif" /> | <img src=".//docs/output.gif" />
 
 ## Setting up the environment
 
@@ -28,6 +33,18 @@
   conda activate nerf
   ```
 
+- Optional: Install Pytorch3D (Only do this if it's not yet installed)
+
+  - Recommended to be installed from a local clone
+
+    - Navigate to `cd ./nerface_code/nerf-pytorch`
+    - clone and install pytorch3D
+    
+      ```shell
+      git clone https://github.com/facebookresearch/pytorch3d.git
+      cd pytorch3d && pip install -e .
+      ```
+
 ## Training the model
 
 - Navigate to the training script
@@ -44,17 +61,19 @@
 
 - Run the training script
 
-  > The training should run for approximately 6 days using a computer with these specifications: NVIDIA 3070 Ti GPU, Ryzen 7 5800, and 32GB RAM.
+  - The training should run for approximately 6 days using a computer with these specifications: NVIDIA 3070 Ti GPU with 8GB vRAM, Ryzen 7 5800 with 32GB RAM.
 
-  ```shell
-  python3 train_transformed_rays_dataloader.py --config ../../data/person_1/person_1_config.yml
-  ```
-
-  - It's recommended to use `nohup` to run it in the background
+  - The dataloader file is an optimized version of the training script to make it run on GPU’s with below 70GB ram.
 
     ```shell
-    nohup python3 train_transformed_rays_dataloader.py --config ../../data/person_1/person_1_config.yml &
+    python3 train_transformed_rays_dataloader.py --config ../../data/person_1/person_1_config.yml
     ```
+
+    - It's recommended to use `nohup` to run it in the background
+
+      ```shell
+      nohup python3 train_transformed_rays_dataloader.py --config ../../data/person_1/person_1_config.yml &
+      ```
 
 ## Processing input video using the trained model
 
