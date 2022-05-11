@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+e#!/usr/bin/env python3
 
 import argparse
 import os
@@ -375,7 +375,7 @@ def main():
     #######################
     no_background = False
     no_expressions = False
-    no_lcode = True
+    no_lcode = False
     nerf = False
     frontalize = False
     interpolate_mouth = False
@@ -419,19 +419,20 @@ def main():
             #expression = render_expressions[0] ### TODO fixes expr
             #expression = torch.zeros_like(expression).to(device)
 
-            ablate = 'latent_code'
+            ablate = 'expression'
 
             if ablate == 'expression':
                 pose = render_poses[997]
             elif ablate == 'latent_code':
-                pose = render_poses[997]
-                expression = render_expressions[997]
-                if idx_map[997+i,1] >= 0:
-                    #print("found latent code for this image")
-                    index_of_image_after_train_shuffle = idx_map[997+i,1]
-            elif ablate == 'view_dir':
                 pose = render_poses[100]
                 expression = render_expressions[100]
+                print("START OF INDEX", index_of_image_after_train_shuffle)
+                if idx_map[100+i,1] >= 0:
+                    print("found latent code for this image")
+                    index_of_image_after_train_shuffle = idx_map[100+i,1]
+            elif ablate == 'view_dir':
+                pose = render_poses[997]
+                expression = render_expressions[997]
                 _, ray_directions_ablation = get_ray_bundle(hwf[0], hwf[1], hwf[2], render_poses[240+i][:3, :4])
 
             pose = pose[:3, :4]
@@ -444,6 +445,7 @@ def main():
             #index_of_image_after_train_shuffle = 10 ## TODO Fixes latent code
             #index_of_image_after_train_shuffle = idx_map[84,1] ## TODO Fixes latent code v2 for andrei
             index_of_image_after_train_shuffle = idx_map[10,1] ## TODO Fixes latent code - USE THIS if not ablating!
+            #print("HELLO", index_of_image_after_train_shuffle)
 
             latent_code = latent_codes[index_of_image_after_train_shuffle].to(device) if use_latent_code else None
 
