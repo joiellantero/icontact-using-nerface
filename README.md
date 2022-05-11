@@ -80,7 +80,7 @@
 
 ## Processing input video using the trained model
 
-> The output will be several photos--these are the processed frames of the video. These will be converted to a video in the next step
+- The output will be several photos--these are the processed frames of the video. These will be converted to a video in the next step. The rendering process should run for approximately 2.5 hours with these computer specifications: NVIDIA 3070 Ti GPU with 8GB vRAM, Ryzen 7 5800 with 32GB RAM.
 
 - Navigate to `./NeRFace/nerface_code/nerf-pytorch`
 
