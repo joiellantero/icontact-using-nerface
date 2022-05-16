@@ -3,3 +3,4 @@ nohup.out
 out*.mp4
 renders/
 data/
+.DS_Store
