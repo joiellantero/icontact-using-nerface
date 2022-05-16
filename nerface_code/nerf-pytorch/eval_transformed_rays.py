@@ -1,4 +1,4 @@
-e#!/usr/bin/env python3
+#!/usr/bin/env python3
 
 import argparse
 import os
@@ -426,9 +426,8 @@ def main():
             elif ablate == 'latent_code':
                 pose = render_poses[100]
                 expression = render_expressions[100]
-                print("START OF INDEX", index_of_image_after_train_shuffle)
                 if idx_map[100+i,1] >= 0:
-                    print("found latent code for this image")
+                    #print("found latent code for this image")
                     index_of_image_after_train_shuffle = idx_map[100+i,1]
             elif ablate == 'view_dir':
                 pose = render_poses[997]
@@ -442,10 +441,9 @@ def main():
                 if idx_map[i,1] >= 0:
                     #print("found latent code for this image")
                     index_of_image_after_train_shuffle = idx_map[i,1]
-            #index_of_image_after_train_shuffle = 10 ## TODO Fixes latent code
+            index_of_image_after_train_shuffle = 10 ## TODO Fixes latent code
             #index_of_image_after_train_shuffle = idx_map[84,1] ## TODO Fixes latent code v2 for andrei
-            index_of_image_after_train_shuffle = idx_map[10,1] ## TODO Fixes latent code - USE THIS if not ablating!
-            #print("HELLO", index_of_image_after_train_shuffle)
+            #index_of_image_after_train_shuffle = idx_map[10,1] ## TODO Fixes latent code - USE THIS if not ablating!
 
             latent_code = latent_codes[index_of_image_after_train_shuffle].to(device) if use_latent_code else None
 
