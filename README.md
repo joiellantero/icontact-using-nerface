@@ -124,6 +124,12 @@
   ffmpeg -framerate 50 -i renders/exp_1/%04d.png -pix_fmt yuv420p -r 50 ./out.mp4
   ```
 
+## Authors
+
+- (Joie Llantero)[joie.llantero@eee.upd.edu.ph]
+
+- (Bea Supanga)[bea.rosari.supanga@eee.upd.edu.ph]
+
 ## References
 
 - [NeRF PyTorch](https://github.com/yenchenlin/nerf-pytorch)
