@@ -10,7 +10,7 @@
 
 | Input | Output |
 |-------|--------|
-| <img src="./docs/input.gif" alt="input video" /> | <img src=".//docs/output.gif" alt="output video" /> |
+| <img src="./docs/person3_input.gif" alt="input video" /> | <img src=".//docs/person3_output.gif" alt="person 3 output video" /> |
 
 ### Dataset
 
@@ -119,9 +119,9 @@
 ## Converting the images to video
 
   ```shell
-  ffmpeg -i renders/<yourfoldername>/%04d.png -pix_fmt yuv420p -crf 19 ./<youroutputfilename>.mp4
-
-  ffmpeg -i renders/exp_1/%04d.png -pix_fmt yuv420p -crf 19 ./out.mp4
+  ffmpeg -framerate 50 -i renders/<yourfoldername>/%04d.png -pix_fmt yuv420p -r 50 ./<youroutputfilename>.mp4
+  
+  ffmpeg -framerate 50 -i renders/exp_1/%04d.png -pix_fmt yuv420p -r 50 ./out.mp4
   ```
 
 ## References
