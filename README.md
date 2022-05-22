@@ -126,4 +126,5 @@
 
 ## References
 
-- [Original repository by Guy Gafni](https://github.com/gafniguy/4D-Facial-Avatars.git)
+-[NeRF PyTorch](https://github.com/yenchenlin/nerf-pytorch)
+-[4D Facial Avatars](https://github.com/gafniguy/4D-Facial-Avatars.git)
