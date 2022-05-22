@@ -126,9 +126,9 @@
 
 ## Authors
 
-- (Joie Llantero)[joie.llantero@eee.upd.edu.ph]
+- [Joie Llantero](joie.llantero@eee.upd.edu.ph)
 
-- (Bea Supanga)[bea.rosari.supanga@eee.upd.edu.ph]
+- [Bea Supanga](bea.rosari.supanga@eee.upd.edu.ph)
 
 ## References
 
